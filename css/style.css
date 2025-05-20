@@ -787,76 +787,63 @@ main {
     height: 25px;
     object-fit: contain;
 }
-/* Стили для блока преимуществ */
+/* Блок преимуществ - исправленная версия */
 .advantages-section {
-    margin-top: 80px;
     width: 100%;
+    margin: 80px 0;
+    padding: 0 20px;
+}
+
+.advantages-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    left: -20px; /* Сдвигаем немного влево */
 }
 
 .advantages-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    gap: 20px;
 }
 
 .advantage-item {
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    padding: 25px;
     display: flex;
-    align-items: center; /* Выравнивание по центру вертикали */
+    align-items: flex-start;
     gap: 15px;
-    min-height: 80px; /* Фиксированная высота для всех элементов */
+    transition: all 0.3s ease;
+}
+
+.advantage-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .advantage-icon {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
 }
 
 .advantage-text {
     flex: 1;
-    white-space: nowrap; /* Запрет переноса текста */
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .advantage-title {
-    font-family: 'Futura PT', sans-serif;
+    font-size: 18px;
     font-weight: 600;
-    font-size: 24px;
-    line-height: 1;
-    letter-spacing: 0;
-    color: #333333;
+    color: #333;
     margin-bottom: 8px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .advantage-description {
-    font-size: 16px;
-    line-height: 1;
-    color: #555555;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
-.advantage-title {
-    font-family: 'Futura PT', sans-serif;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #333333;
-    margin-bottom: 12px;
-}
-
-.advantage-description {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.4;
-    color: #555555;
+    color: #666;
 }
 /* Основные стили футера */
 .footer {
@@ -1108,142 +1095,309 @@ main {
     height: 25px;
     object-fit: contain;
 }
-/* Мобильная адаптация (320px и меньше) */
+/* Полная адаптация для 320px */
 @media (max-width: 320px) {
+    /* Общие стили */
     body {
-        padding-top: 60px;
+        padding-top: 70px;
+        min-width: 320px;
+        overflow-x: hidden;
     }
-
-    /* Хедер */
+    
+    /* Хеддер */
     header {
-        height: 60px;
-        padding: 5px 10px;
+        height: 100px;
+        padding: 10px 15px;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-    }
-
-    .logo img {
-        width: 70px;
-    }
-
-    .header-text,
-    .contact-info {
-        display: none; /* Скрываем ненужные элементы */
-    }
-
-    /* Гамбургер-меню на чистом CSS */
-    nav {
-        position: relative;
-        width: 30px;
-        height: 20px;
-        cursor: pointer;
-    }
-
-    nav ul {
-        display: none;
+        justify-content: space-between;
+        background: #F1F1F5;
         position: fixed;
-        top: 60px;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        border-bottom: 1px solid #E0E0E0;
+    }
+    
+    .logo {
+     position: absolute;
+    left: 21px;
+    top: 10px;
+
+    }
+    
+    .logo img {
+        width: 120px;
+        height: 80px;
+        object-fit: contain;
+    }
+    
+    .header-text {
+        order: 2;
+        margin-left: 10px;
+        flex-grow: 1;
+    }
+    
+    .main-title, .models {
+        font-size: 10px;
+        line-height: 1.2;
+        white-space: nowrap;
+        margin: 0;
+    }
+    
+    .contact-info {
+        display: none;
+    }
+    
+    .mobile-phone {
+        display: flex !important;
+        order: 3;
+        margin: 0 10px;
+    }
+    
+    .mobile-phone a img {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        left: 170px;
+        top: 30px;
+    }
+    
+    /* Бургер меню */
+    .burger-menu {
+        display: flex !important;
+        order: 4;
+        width: 25px;
+        height: 20px;
+        position: relative;
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .burger-menu span {
+        display: block;
+        height: 2px;
+        width: 100%;
+        background: #000;
+        transition: all 0.3s;
+    }
+    
+    #mobile-menu-toggle:checked ~ .burger-menu span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    #mobile-menu-toggle:checked ~ .burger-menu span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    #mobile-menu-toggle:checked ~ .burger-menu span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+    
+    /* Навигация */
+    nav {
+        position: fixed;
+        top: 70px;
         left: 0;
         width: 100%;
         background: white;
-        padding: 10px 0;
+        z-index: 1000;
+        padding: 20px;
         box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-    }
-
-    /* Три полоски гамбургера */
-    nav::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: #000;
-        box-shadow: 0 9px 0 #000, 0 18px 0 #000;
-    }
-
-    /* Чекбокс-хаки для открытия меню */
-    #mobile-menu-toggle {
         display: none;
     }
-
-    #mobile-menu-toggle:checked ~ nav ul {
+    
+    #mobile-menu-toggle:checked ~ nav {
         display: block;
     }
-
-    #mobile-menu-toggle:checked ~ nav::before {
-        box-shadow: none;
-        transform: rotate(45deg);
-        top: 9px;
+    
+    nav ul {
+        flex-direction: column;
+        gap: 15px;
+        padding: 0;
     }
-
-    #mobile-menu-toggle:checked ~ nav::after {
-        content: '';
-        position: absolute;
-        top: 9px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: #000;
-        transform: rotate(-45deg);
-    }
-
-    /* Стили для пунктов меню */
+    
     nav ul li {
         margin: 0;
-        padding: 10px 15px;
     }
-
-    nav ul li a {
-        font-size: 14px;
-        display: block;
-    }
-
+    
     .button_catalog {
-        width: 100%;
-        margin-top: 10px;
         justify-content: center;
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
     }
-
+    
+    .catalog-icon {
+        width: 20px;
+        height: 15px;
+    }
+    
     /* Основной контент */
     main {
-        padding: 15px 10px;
+        padding: 0 15px;
     }
-
+    
     .main-banner {
-        height: 100px;
+        height: 150px;
+        margin-bottom: 20px;
     }
-
-    /* Каталог - одна колонка */
+    
+    /* Каталог */ 
     .catalog-sections {
-        grid-template-columns: 1fr !important;
-    }
-
-    .catalog-section {
-        height: auto;
-        padding: 15px;
+        display: flex !important;
         flex-direction: column;
+        gap: 10px;
     }
-
+    
+    .catalog-section {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 180px;
+        padding: 15px;
+        margin: 0 !important;
+    }
+    
     .section-title {
-        font-size: 16px;
+        font-size: 18px !important;
+        line-height: 1.2;
+        white-space: normal;
+    }
+    
+    .image-container {
+        height: 80px;
         margin-bottom: 10px;
     }
-
-    .image-container {
-        height: 70px;
+    
+    .section-image {
+        width: 70% !important;
+        height: auto !important;
+        max-height: 80px;
     }
-
+    
+    /* Главная кнопка каталога */
     .main-catalog-button {
-        height: auto;
-        padding: 15px;
+        height: auto !important;
+        min-height: 200px;
+        padding: 30px 20px;
+        grid-column: 1 !important;
     }
-
-    /* Остальные секции */
-    .info-section,
-    .news-background,
+    
+    .catalog-main-image {
+        width: 100% !important;
+        max-width: 250px;
+        height: auto !important;
+        position: static !important;
+        margin-top: 15px;
+        opacity: 0.6;
+    }
+    
+    /* Информационная секция */
+    .info-section {
+        padding: 40px 15px;
+    }
+    
+    .info-container {
+        flex-direction: column;
+    }
+    
+    .info-title {
+        font-size: 24px;
+    }
+    
+    .info-text {
+        font-size: 14px;
+    }
+    
+    /* Новости */
+    .news-background {
+        padding: 40px 15px;
+        background-size: 50% auto;
+    }
+    
+    .news-main-title {
+        font-size: 24px;
+    }
+    
+    .news-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .news-image {
+        height: 150px;
+    }
+    
+    /* Безопасность */
     .safety-section {
-        padding: 20px 10px;
+        padding: 40px 15px;
+    }
+    
+    .safety-grid {
+        flex-direction: column;
+    }
+    
+    .safety-card {
+        width: 100%;
+        margin-bottom: 15px;
+        min-height: auto;
+    }
+    
+    /* Преимущества */
+    .advantages-section {
+        margin: 40px 0;
+        padding: 0 15px;
+    }
+    
+    .advantages-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    /* Футер */
+    .footer {
+        padding-top: 40px;
+    }
+    
+    .footer-container {
+        padding: 0 15px;
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .footer-brand-column {
+        order: 1;
+    }
+    
+    .footer-menu-columns {
+        order: 2;
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .footer-contact-info {
+        order: 3;
+        margin-top: 20px;
+    }
+    
+    .footer-logo {
+        width: 150px;
+    }
+    
+    .footer-button {
+        font-size: 14px;
+    }
+    
+    /* Нижняя часть футера */
+    .footer-bottom-inner {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .payment-icons {
+        justify-content: center;
     }
 }

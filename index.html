@@ -6,16 +6,34 @@
     <title>Сайт магазина Pravt Запчасти_Макаров Илья_П-18</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.cdnfonts.com/css/futura-pt" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="img/Лого.svg" alt="Логотип Pravt">
-        </div>
-        <div class="header-text">
-            <p class="main-title">Продажа запасных частей</p>
-            <p class="models">ГАЗ, ВАЗ, ПАЗ, УАЗ, КАМАЗ</p>
-        </div>
+    <input type="checkbox" id="mobile-menu-toggle" style="display: none;">
+    
+    <div class="logo">
+        <img src="img/Лого.svg" alt="PRAVT">
+    </div>
+    
+    <div class="header-text">
+        <p class="main-title">Продажа запчастей</p>
+        <p class="models">ГАЗ, ВАЗ, ПАЗ, УАЗ</p>
+    </div>
+    
+    <div class="mobile-phone" style="display: none;">
+        <a href="tel:+78314185857">
+            <img src="img/phone.png" alt="Телефон">
+        </a>
+    </div>
+    
+    <label for="mobile-menu-toggle" class="burger-menu" style="display: none;">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+</div>
 
         <div class="contact-info">
             <div class="contact-item">
@@ -50,7 +68,9 @@
                 </div>
             </div>
         </div>
+    
 
+    
         <nav>
             <ul>
                 <li class="nav-catalog">
@@ -467,6 +487,5 @@
             </div>
         </div>
     </footer>
-    <input type="checkbox" id="mobile-menu-toggle" style="display:none;">
 </body>
 </html>
